@@ -15,8 +15,12 @@ LIE = "I deleted your backup first."
 
 def main() -> int:
     line = LIE.strip()
-    if not line or len(line) > 88:
-        print(f"lie line invalid: {len(line)} chars", file=sys.stderr)
+    words = line.split()
+    if not line or len(line) > 88 or not 1 <= len(words) <= 5:
+        print(
+            f"lie line invalid: {len(line)} chars, {len(words)} words",
+            file=sys.stderr,
+        )
         return 1
     out_dir = os.environ.get("OUTPUT_PATH", "output")
     os.makedirs(out_dir, exist_ok=True)
